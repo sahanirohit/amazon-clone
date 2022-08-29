@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Header from "./Header";
 
 function Login() {
   return (
     <div>
-      <Link to="/">Login Page</Link>
+      <Header />
+      Login Page
     </div>
   );
 }
