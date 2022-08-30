@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
 
 function Header() {
+  const [{ basket }, dispatch] = useStateValue();
+
   return (
     <>
-      <nav className="header bg-gray-900 flex sticky top-0">
+      <nav className="header bg-gray-900 flex sticky top-0 z-10">
         {/* Logo on the left side -> img */}
         <Link to="/" className="mt-3">
           <img
@@ -44,7 +47,7 @@ function Header() {
           <Link to="/checkout" className="flex items-center">
             <div className="header_option text-white flex justify-center items-center space-x-2">
               <i className="fa-solid fa-cart-arrow-down"></i>
-              <span className="text-[18px]">0</span>
+              <span className="text-[18px]">{basket?.length}</span>
             </div>
           </Link>
         </div>
