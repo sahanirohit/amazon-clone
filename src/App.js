@@ -19,8 +19,24 @@ function App() {
               </>
             }
           />
-          <Route path="/login" element={<Login />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Header />
+                <Login />
+              </>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <>
+                <Header />
+                <Checkout />
+              </>
+            }
+          />
         </Routes>
       </Router>
     </div>
