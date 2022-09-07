@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 
 function Header() {
-  const [{ basket }] = useStateValue();
-
+  const [{ basket, user }] = useStateValue();
+  const handleAuthentication = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
   return (
     <>
       <nav className="header bg-gray-900 flex sticky top-0 z-10">
@@ -26,10 +31,18 @@ function Header() {
         </div>
         {/* Header Links */}
         <div className="header__links flex justify-evenly space-x-6 mx-4">
-          <Link to="/login" className="flex items-center">
-            <div className="header_option text-white flex flex-col">
-              <span className="text-[10px] text-gray-300">Hello,</span>
-              <span className="text-[13px] font-bold">Sign In</span>
+          <Link to={user ? "" : "/login"} className="flex items-center">
+            <div
+              onClick={handleAuthentication}
+              className="header_option text-white flex flex-col">
+              <span className="text-[10px] text-gray-300">
+                {" "}
+                Hello,
+                {user ? ` ${auth.currentUser.email.trim()}` : " Guest"}
+              </span>
+              <span className="text-[13px] font-bold">
+                {user ? "Sign Out" : "Sign In"}
+              </span>
             </div>
           </Link>
           <Link to="/" className="flex items-center">
